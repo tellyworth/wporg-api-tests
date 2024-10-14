@@ -1,0 +1,29 @@
+{
+	"name": "wporg/api-tests",
+	"description": "Experimental regressions tests for api.wordpress.org",
+	"homepage": "https://wordpress.org/plugins",
+	"license": "GPL-2.0-or-later",
+	"config": {
+		"platform": {
+			"php": "7.4"
+		},
+		"_comment": "Work around `test:watch` timeout, see https://github.com/spatie/phpunit-watcher/issues/63#issuecomment-545633709",
+		"process-timeout": 0
+	},
+	"require": {
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^7",
+		"spatie/phpunit-watcher": "^1.23"
+	},
+	"scripts": {
+		"test": [
+			"phpunit tests"
+		],
+		"test:watch": "phpunit-watcher watch < /dev/tty"
+	},
+	"autoload": {
+		"classmap": [
+		]
+	}
+}
