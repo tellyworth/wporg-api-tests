@@ -49,3 +49,9 @@ wp-config.php
 
 # Vendor
 /vendor/
+
+# npm
+/node_modules/
+
+# testing
+.phpunit.result.cache
