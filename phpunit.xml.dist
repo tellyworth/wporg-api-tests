@@ -9,7 +9,7 @@
 
 	<testsuites>
 		<testsuite name="WordPress">
-			<directory suffix="UnitTest.php">./tests/</directory>
+			<directory suffix=".php">./tests/</directory>
 		</testsuite>
 	</testsuites>
 
