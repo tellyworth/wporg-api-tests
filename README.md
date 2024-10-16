@@ -16,3 +16,14 @@ $ npm install
 $ npm run test
 ```
 
+For more verbose test ouptut:
+
+```
+$ npm run testverbose
+```
+
+To run tests from one specific `@group` (also works with `testverbose`):
+
+```
+$ npm run test -- --group=plugins
+```
