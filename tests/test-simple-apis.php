@@ -55,8 +55,8 @@ class TestSimpleAPIs extends TestCase {
 			[ 'https://api.wordpress.org/events/1.0/?latitude=51.051&longitude=13.738' ],
 			[ 'https://api.wordpress.org/events/1.0/?ip=136.0.16.1' ],
 			[ 'https://api.wordpress.org/events/1.0/?country=IT' ],
-			[ 'https://api.wordpress.org/core/browse-happy/1.1/' ],
-			[ 'https://api.wordpress.org/core/serve-happy/1.0/' ],
+			[ 'https://api.wordpress.org/core/browse-happy/1.1/?useragent=Mozilla/5.0' ],
+			[ 'https://api.wordpress.org/core/serve-happy/1.0/?php_version=7.2' ],
 		];
 	}
 
