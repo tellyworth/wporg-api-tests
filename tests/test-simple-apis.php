@@ -6,6 +6,12 @@ use PHPUnit\Framework\TestCase;
 
 class TestSimpleAPIs extends TestCase {
 
+	// This checks a string for PHP syntax errors. It's dangerous because it runs the code.
+	// Invalid syntax should throw a ParseError.
+	public static function danger_unsafe_check_php_syntax( $php_code ) {
+		return @eval( $php_code );
+	}
+
 	public static function simple_api_provider() {
 		// See https://codex.wordpress.org/WordPress.org_API
 
@@ -33,6 +39,14 @@ class TestSimpleAPIs extends TestCase {
 			[ 'https://api.wordpress.org/plugins/info/1.0/hello-dolly.json' ],
 			//[ 'https://api.wordpress.org/plugins/update-check/1.0/' ],
 			//[ 'https://api.wordpress.org/plugins/update-check/1.1/' ],
+			[ 'https://api.wordpress.org/patterns/1.0/' ],
+			[ 'https://api.wordpress.org/patterns/1.0/?pattern-categories=2' ],
+			[ 'https://api.wordpress.org/patterns/1.0/?search=button' ],
+			[ 'https://api.wordpress.org/patterns/1.0/?wp-version=5.8&pattern-keywords=11&locale=en_US&search=button' ],
+			[ 'https://api.wordpress.org/patterns/1.0/?wp-version=5.8&pattern-keywords=11&locale=es_MX&search=Contacto' ],
+			[ 'https://api.wordpress.org/core/importers/1.0/' ],
+    		[ 'https://api.wordpress.org/core/importers/1.1/' ],
+			[ 'https://api.wordpress.org/core/checksums/1.0/?version=6.6&locale=en_US' ],
 		];
 	}
 
@@ -53,7 +67,7 @@ class TestSimpleAPIs extends TestCase {
 
 		$body = wp_remote_retrieve_body( $response );
 		$this->assertNotEmpty( $body );
-		#$this->assertNotEquals( 'error', $body );
+		$this->assertNotEquals( 'error', $body );
 
 		// Check for valid json if it looks like json.
 		if ( str_starts_with( $body, '{' ) || str_starts_with( wp_remote_retrieve_header( $response, 'content-type' ), 'application/json' ) ) {
@@ -64,9 +78,17 @@ class TestSimpleAPIs extends TestCase {
 		}
 
 		// Check for validity if it looks serialized
-		if ( str_starts_with( $body, 'a:' ) ) {
+		elseif ( str_starts_with( $body, 'a:' ) ) {
 			$data = unserialize( $body );
 			$this->assertTrue( is_array( $data ) );
+		} elseif ( str_starts_with( $body, 'O:' ) ) {
+			$data = unserialize( $body );
+			$this->assertTrue( is_object( $data ) );
+		} elseif ( str_starts_with( $body, 'define(' ) ) {
+			// Could probably use a regex here instead of dangerous eval.
+			$this->assertEmpty( self::danger_unsafe_check_php_syntax( $body ) );
+		} else {
+			$this->markTestIncomplete( "No data check for $url (" . wp_remote_retrieve_header( $response, 'content-type' ) . ')' );
 		}
 
 		#var_dump( $url, $body );
