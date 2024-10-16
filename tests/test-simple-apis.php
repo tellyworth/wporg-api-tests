@@ -45,8 +45,18 @@ class TestSimpleAPIs extends TestCase {
 			[ 'https://api.wordpress.org/patterns/1.0/?wp-version=5.8&pattern-keywords=11&locale=en_US&search=button' ],
 			[ 'https://api.wordpress.org/patterns/1.0/?wp-version=5.8&pattern-keywords=11&locale=es_MX&search=Contacto' ],
 			[ 'https://api.wordpress.org/core/importers/1.0/' ],
-    		[ 'https://api.wordpress.org/core/importers/1.1/' ],
+			[ 'https://api.wordpress.org/core/importers/1.1/' ],
 			[ 'https://api.wordpress.org/core/checksums/1.0/?version=6.6&locale=en_US' ],
+			[ 'https://api.wordpress.org/events/1.0' ],
+			[ 'https://api.wordpress.org/events/1.0/?number=3' ],
+			[ 'https://api.wordpress.org/events/1.0/?location=Seattle' ],
+			[ 'https://api.wordpress.org/events/1.0/?locale=de_DE&timezone=Europe/Berlin&location=Dresden' ],
+			[ 'https://api.wordpress.org/events/1.0/?location=Australia' ],
+			[ 'https://api.wordpress.org/events/1.0/?latitude=51.051&longitude=13.738' ],
+			[ 'https://api.wordpress.org/events/1.0/?ip=136.0.16.1' ],
+			[ 'https://api.wordpress.org/events/1.0/?country=IT' ],
+			[ 'https://api.wordpress.org/core/browse-happy/1.1/' ],
+			[ 'https://api.wordpress.org/core/serve-happy/1.0/' ],
 		];
 	}
 
