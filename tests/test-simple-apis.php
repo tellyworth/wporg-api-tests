@@ -4,6 +4,9 @@ use PHPUnit\Framework\TestCase;
 
 // Simple test cases for GET requests on older APIs.
 
+/***
+ * @group simple
+ */
 class TestSimpleAPIs extends TestCase {
 
 	// This checks a string for PHP syntax errors. It's dangerous because it runs the code.
