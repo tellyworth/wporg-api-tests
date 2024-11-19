@@ -59,9 +59,11 @@ class TestPluginsUpdateCheck extends TestCase {
 	public function test_update_check( $url, $body, $expected_content_type, $expected_body ) {
 		$args = [
 			'body' => $body,
+			'sslverify' => false,
 		];
 
 		$response = wp_remote_post( $url, $args );
+		$this->assertNotInstanceOf( 'WP_Error', $response );
 
 		$this->assertEquals( 200, wp_remote_retrieve_response_code( $response ) );
 		$this->assertNotEquals( 'error', wp_remote_retrieve_body( $response ) );

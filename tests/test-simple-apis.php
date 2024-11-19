@@ -75,6 +75,7 @@ class TestSimpleAPIs extends TestCase {
 		// - Check for valid serialized data.
 
 		$response = wp_remote_get( $url );
+		$this->assertNotInstanceOf( 'WP_Error', $response );
 
 		$this->assertEquals( 200, wp_remote_retrieve_response_code( $response ) );
 
