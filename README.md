@@ -27,3 +27,10 @@ To run tests from one specific `@group` (also works with `testverbose`):
 ```
 $ npm run test -- --group=plugins
 ```
+
+To enable a proxy, edit `tests/bootstrap.php` and uncomment these lines with appropriate values:
+
+```
+#define( 'WP_PROXY_HOST', '127.0.0.1' );
+#define( 'WP_PROXY_PORT', '8080' );
+```
