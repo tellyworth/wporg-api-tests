@@ -48,7 +48,7 @@ class TestPluginsUpdateCheck extends TestCase {
     ]
 }' ],
 			  'application/json; charset=utf-8',
-			  '{"plugins":[],"translations":[],"no_update":[]}'
+			  '{"plugins":[],"translations":[],"no_update":[],"closed":[]}'
 			],
 		];
 	}

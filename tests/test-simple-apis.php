@@ -854,8 +854,9 @@ class TestSimpleAPIs extends TestCase {
 	"6.3.5" : "outdated",
 	"6.4.5" : "outdated",
 	"6.5.5" : "outdated",
-	"6.6.1" : "outdated",
-	"6.6.2" : "latest"
+	"6.6.1" : "insecure",
+	"6.6.2" : "outdated",
+	"6.7" : "latest"
 }
 
 JSON;
