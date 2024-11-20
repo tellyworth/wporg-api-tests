@@ -15,6 +15,22 @@ class TestSimpleAPIs extends TestCase {
 		return @eval( $php_code );
 	}
 
+	/**
+	 * @group connectivity
+	 */
+	public function test_connectivity() {
+		// This just checks that we can reach the API servers and get a sane response.
+
+		$response = wp_remote_get( 'https://api.wordpress.org/stats/wordpress/1.0/' );
+		// Not an error
+		$this->assertNotInstanceOf( 'WP_Error', $response );
+		// Not an unexpected HTTP response
+		$this->assertEquals( 200, wp_remote_retrieve_response_code( $response ) );
+		// Must be json
+		$this->assertIsArray( json_decode( wp_remote_retrieve_body( $response ), true ) );
+
+	}
+
 	public static function simple_api_provider() {
 		// See https://codex.wordpress.org/WordPress.org_API
 
@@ -65,6 +81,7 @@ class TestSimpleAPIs extends TestCase {
 
 	/**
 	 * @dataProvider simple_api_provider
+	 * @depends test_connectivity
 	 */
 	public function test_simple_api( $url ) {
 
@@ -108,6 +125,9 @@ class TestSimpleAPIs extends TestCase {
 		#var_dump( $url, $body );
 	}
 
+	/**
+	 * @depends test_connectivity
+	 */
 	public function test_core_stable_check() {
 		$expected = <<<JSON
 {
