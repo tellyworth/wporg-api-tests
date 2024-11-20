@@ -82,31 +82,46 @@ class VersionCheckTest extends TestCase {
 		$response = json_decode( wp_remote_retrieve_body( $http_response ), true );
 
 		$expected = array (
-			'offers' =>
+			0 =>
 			array (
-			  0 =>
+			  'response' => 'upgrade',
+			  'download' => 'https://downloads.wordpress.org/release/wordpress-6.7.zip',
+			  'locale' => 'en_US',
+			  'packages' =>
 			  array (
-				'response' => 'latest',
-				'download' => 'https://downloads.wordpress.org/release/wordpress-6.6.2.zip',
-				'locale' => 'en_US',
-				'packages' =>
-				array (
-				  'full' => 'https://downloads.wordpress.org/release/wordpress-6.6.2.zip',
-				  'no_content' => 'https://downloads.wordpress.org/release/wordpress-6.6.2-no-content.zip',
-				  'new_bundled' => 'https://downloads.wordpress.org/release/wordpress-6.6.2-new-bundled.zip',
-				  'partial' => false,
-				  'rollback' => false,
-				),
-				'current' => '6.6.2',
-				'version' => '6.6.2',
-				'php_version' => '7.2.24',
-				'mysql_version' => '5.5.5',
-				'new_bundled' => '6.4',
-				'partial_version' => false,
+				'full' => 'https://downloads.wordpress.org/release/wordpress-6.7.zip',
+				'no_content' => 'https://downloads.wordpress.org/release/wordpress-6.7-no-content.zip',
+				'new_bundled' => 'https://downloads.wordpress.org/release/wordpress-6.7-new-bundled.zip',
+				'partial' => false,
+				'rollback' => false,
 			  ),
+			  'current' => '6.7',
+			  'version' => '6.7',
+			  'php_version' => '7.2.24',
+			  'mysql_version' => '5.5.5',
+			  'new_bundled' => '6.7',
+			  'partial_version' => false,
 			),
-			'translations' =>
+			1 =>
 			array (
+			  'response' => 'autoupdate',
+			  'download' => 'https://downloads.w.org/release/wordpress-6.7.zip',
+			  'locale' => 'en_US',
+			  'packages' =>
+			  array (
+				'full' => 'https://downloads.w.org/release/wordpress-6.7.zip',
+				'no_content' => 'https://downloads.w.org/release/wordpress-6.7-no-content.zip',
+				'new_bundled' => 'https://downloads.w.org/release/wordpress-6.7-new-bundled.zip',
+				'partial' => false,
+				'rollback' => false,
+			  ),
+			  'current' => '6.7',
+			  'version' => '6.7',
+			  'php_version' => '7.2.24',
+			  'mysql_version' => '5.5.5',
+			  'new_bundled' => '6.7',
+			  'partial_version' => false,
+			  'new_files' => true,
 			),
 		);
 
@@ -115,7 +130,8 @@ class VersionCheckTest extends TestCase {
 		$this->assertIsArray( $response['offers'] );
 
 		// The response will change with each release, will probably need to adjust this a bit to suit.
-		$this->assertContains( $expected['offers'][0], $response['offers'] );
+		$this->assertContains( $expected[0], $response['offers'] );
+		$this->assertContains( $expected[1], $response['offers'] );
 
 	}
 
